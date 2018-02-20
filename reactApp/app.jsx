@@ -113,7 +113,7 @@ class Item extends React.Component{
    }
         render() {
       return (
-        <div  >
+        <div className='col-md-6' >
         <img src={this.props.imageUrl} alt="No Image Available" width="75px"/> 
         <div style={{font: '25 px', fontWeight:'bold'}}>
         <h3>{this.props.name}</h3>  
@@ -140,41 +140,50 @@ class ItemList extends React.Component{
    }
     render(){
     return (
-    <div className='col-md-6'>
+    <div className='row'>
             {this.props.objects.map((item)=> 
-            <Item  key={item.id} imageUrl={item.imageUrl} id={item.id} name= {item.name} handler={this.props.handler}/>) }
+            <Item   key={item.id} imageUrl={item.imageUrl} id={item.id} name= {item.name} handler={this.props.handler}/>) }
           
         
     </div>
     )}
 }
+function SideMenu(props){
+     return (
+         <div>
+         {props.menu.map((item) =>  
+          <a href="#">{item.name}</a>
+          )}
+        </div>     
+         );
+    
+}
+
 function Sidenav(props) {
-    
-    
-        
+      const smenu =[{name:'About Us'}, {name:'Services'},{name:'Contact Us'} ];
+  
       return (
         <div id="mySidenav" className="sidenav">
           <a href="javascript:void(0)" className="closebtn" onClick={props.close}>&times;</a>
-          <a href="#">About</a>
-          <a href="#">Services</a>
-          <a href="#">Clients</a>
-          <a href="#">Contact</a>
+          <SideMenu menu={smenu} />
         </div>
 
          );
     
     
 }
-function Navbar() {
+function Navbar(props) {
     
     
         
       return (
+          
         <nav className="navbar navbar-expand-sm bg-light">
     <ul className="navbar-nav">
+    <li  className="nav-item nav-link" style={props.sidenavStyle} onClick={props.open}>&#9776; </li>            
     <li className="nav-item"><a className="nav-link" href="#">Home</a></li>
           </ul>
-
+ 
           </nav>
 
 
@@ -230,9 +239,9 @@ class Test extends React.Component{
     
     render(){
     return (
-    <div id='main' >
-    <Navbar/>        
-    <div style={this.state.sidenavStyle} onClick={this.openNav}>&#9776; open</div>        
+    <div id='main'  >
+    <Navbar  sidenavStyle={this.state.sidenavStyle} open={this.openNav}/>        
+    
     <Sidenav close={this.closeNav}/>
     <ItemList objects={this.state.objects} count={this.state.count} handler={this.pushToArray}/>         
     
