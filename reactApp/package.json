@@ -1,0 +1,18 @@
+{
+  "name": "reactapp",
+  "version": "1.0.0",
+  "description": "First React App",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot"
+  },
+  "author": "Mitarth Vaid",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
+  }
+}
