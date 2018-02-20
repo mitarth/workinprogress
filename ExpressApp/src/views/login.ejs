@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+       'use strict' 
+    $('#signUpButton').click(function(){
+        alert('Hello');
+           $('signup').show();                  
+        });
+    </script>
+</head>
+<body>
+
+<div id='signin' class="col-md-4">
+    Sign In
+  <form name='signin'action="auth/signin" method="post">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control"  placeholder="Enter Username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control"  placeholder="Enter password" name="password" required>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="remember"> Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-default">Sign In</button>
+    <button id='signUpButton'type="button" class="btn btn-default">Sign Up</button>
+    
+    </form>
+</div>
+<div id='signup' style='display:none;' class="col-md-4">
+  Sign Up 
+  <form name='signup'action="auth/signup" method="post">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter Username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+
+</body>
+</html>
+        
