@@ -41,7 +41,7 @@ loginRouter.route('/profile')
     next();
 })
     .get(function(req,res){
-    res.render('Home',{title:'I am Mitarth',nav:[{name:'Heroes',link:'Heroes'},{name:'Villains',link:'Villains'}]});
+    res.render('Home',{uname:req.user.username,title:'I am Mitarth',nav:[{name:'Heroes',link:'Heroes'},{name:'Villains',link:'Villains'}]});
 
 })
 return loginRouter;

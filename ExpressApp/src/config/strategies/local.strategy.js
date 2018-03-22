@@ -27,6 +27,17 @@ module.exports = function(){
          db.close();
 });
 
-        
+       /* if(password==='test'){
+                console.log('Welcome '+username);
+                user={
+        username:username,
+        password:'test'
+    }
+                done(null,user); 
+                
+            }
+             else{
+             done('Incorrect Password',null);
+             }*/
     }));
 };
