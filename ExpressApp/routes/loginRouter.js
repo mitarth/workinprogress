@@ -1,15 +1,19 @@
 'use strict';
+var EAPP = require('../src/constants/constants.js');
+
+var MAIN_DB = EAPP.MAIN_DB;
+
 var express = require('express');
 var loginRouter = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/zoom';
+var url = EAPP.MONGO_URL;
 var passport = require('passport');
 
 var router = function(nav){
 loginRouter.route('/signup')
 .post(function(req,res){
       MongoClient.connect(url, function(err, db) {
-      var dbo = db.db('zoom');
+      var dbo = db.db(MAIN_DB);
      
           var user={
           username: req.body.username,
@@ -41,7 +45,7 @@ loginRouter.route('/profile')
     next();
 })
     .get(function(req,res){
-    res.render('Home',{uname:req.user.username,title:'I am Mitarth',nav:[{name:'Heroes',link:'Heroes'},{name:'Villains',link:'Villains'}]});
+    res.render('Home',{uname:req.user.username,title:'I am Mitarth',nav:EAPP.NAVMENU});
 
 })
 return loginRouter;

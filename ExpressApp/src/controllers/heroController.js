@@ -1,12 +1,16 @@
+var EAPP = require('../constants/constants.js');
+
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/zoom";
+var url = EAPP.MONGO_URL;
 var objectId = require('mongodb').ObjectID;
+var HERO_COLLECTION = EAPP.HERO_COLLECTION;
+var MAIN_DB = EAPP.MAIN_DB;
 
 var heroController = function(heroService,nav){
     var getIndex = function(req,res){
     MongoClient.connect(url, function(err, db) {
-      var dbo = db.db("zoom");
-      dbo.collection("Heroes").find({}).toArray(
+      var dbo = db.db(MAIN_DB);
+      dbo.collection(HERO_COLLECTION).find({}).toArray(
           function(err, result) {
         res.render('Heroes',{
         nav:nav,
@@ -21,8 +25,8 @@ var heroController = function(heroService,nav){
     var getById = function(req,res){
     var id= new objectId(req.params.id);
     MongoClient.connect(url, function(err, db) {
-  var dbo = db.db("zoom");
-  dbo.collection("Heroes").findOne({_id:id},function(err, result) {
+  var dbo = db.db(MAIN_DB);
+  dbo.collection(HERO_COLLECTION).findOne({_id:id},function(err, result) {
     res.render('Hero',{
         hero:result,
         nav:nav

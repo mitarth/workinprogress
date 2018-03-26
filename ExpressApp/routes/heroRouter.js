@@ -1,8 +1,11 @@
 'use strict';
+var EAPP = require('../src/constants/constants.js');
+var HERO_COLLECTION = EAPP.HERO_COLLECTION;
+var MAIN_DB = EAPP.MAIN_DB;
 var express = require('express');
 var heroRouter = express.Router();
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/zoom";
+var url = EAPP.MONGO_URL;
 var objectId = require('mongodb').ObjectID;
 
 var heroes = [
@@ -39,8 +42,8 @@ heroRouter.route('/addHero')
 .get(function(req,res){
     
   MongoClient.connect(url, function(err, db) {
-  var dbo = db.db("zoom");
-  dbo.collection("Heroes").insertMany(heroes,function(err, result) {
+  var dbo = db.db(MAIN_DB);
+  dbo.collection(HERO_COLLECTION).insertMany(heroes,function(err, result) {
     res.json(result);
     db.close();
 });

@@ -3,10 +3,11 @@ var express = require('express');
 var cookie = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
-
+var EAPP = require('./src/constants/constants.js');
 var app = express();
-var port = 3001;
-var nav =[{name:'Heroes',link:'Heroes'},{name:'Villains',link:'Villains'}]
+var port = EAPP.PORT;
+var nav =EAPP.NAVMENU;
+var url = EAPP.MONGO_URL;
 
 var bodyParser = require('body-parser');
 var heroRouter = require('./routes/heroRouter')(nav);
@@ -16,12 +17,13 @@ var loginController = require('./src/controllers/loginController')
 app.use(express.static('public'));
 app.set('views','./src/views');
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/zoom";
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookie());
 app.use(session({secret:'batman'}));
 require('./src/config/passport')(app);
+
 app.set('view engine','.ejs');
 
 app.use('/auth/Heroes',heroRouter);
@@ -36,15 +38,17 @@ app.use(bodyParser.urlencoded());
 });*/
 app.get('/', function (req, res) {
     console.log('NAME:   '+req.body.name);
-	res.render('login',{title:'I am Mitarth',nav:[{name:'Heroes',link:'Heroes'},{name:'Villains',link:'Villains'}]});
+	res.render('login',{nav:EAPP.NAVMENU});
 }); 
 app.get('/test',function(req,res){
     var message = loginController.getCred;
 	res.json({message : loginController.getCred});
         });
+
+//React Requests
 app.post('/', function (req, res) {
    console.log('NAMEE:   '+req.body.name);
-	res.render('login',{title:'I am Mitarth',nav:[{name:'Heroes',link:'Heroes'},{name:'Villains',link:'Villains'}]});
+	res.render('login',{title:'I am Mitarth',nav:EAPP.NAVMENU});
 }); 
 app.post('/auth',function (req, res) {
     console.log('Auth :   '+req.body.name);
