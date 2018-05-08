@@ -40,10 +40,11 @@ heroRouter.route('/')
 
 heroRouter.route('/addHero')
 .get(function(req,res){
+  hero = {name:'Green Arrow',id:15,imageUrl:'',city:'Starling City',identity : 'Oliver Queen',usp : 'Archery'}
     
   MongoClient.connect(url, function(err, db) {
   var dbo = db.db(MAIN_DB);
-  dbo.collection(HERO_COLLECTION).insertMany(heroes,function(err, result) {
+  dbo.collection(HERO_COLLECTION).insertMany(hero,function(err, result) {
     res.json(result);
     db.close();
 });
